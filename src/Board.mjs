@@ -1,23 +1,23 @@
 export class Board {
   width;
   height;
-  rows;
+  state;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
 
-    this.rows = [];
+    this.state = [];
     for (let row = 0; row < height; row++) {
       const row = [];
       for (let col = 0; col < width; col++) {
         row.push(".");
       }
-      this.rows.push(row);
+      this.state.push(row);
     }
   }
 
   toString() {
-    return this.rows.map((row) => row.join("") + "\n").join("");
+    return this.state.map((row) => row.join("") + "\n").join("");
   }
 }
