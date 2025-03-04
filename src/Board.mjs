@@ -18,15 +18,6 @@ export class Board {
   }
 
   toString() {
-    let res = "";
-
-    for (let row = 0; row < this.height; row++) {
-      for (let col = 0; col < this.width; col++) {
-        res += ".";
-      }
-      res += "\n";
-    }
-
-    return res;
+    return this.rows.map((row) => row.join("") + "\n").join("");
   }
 }
