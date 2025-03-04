@@ -13,10 +13,18 @@ export class RotatingShape {
     return this.shape.map((row) => row.join("") + "\n").join("");
   }
 
-  rotateRight() {
+  #rotate(clockwise = true) {
     const transposed = this.shape[0].map((_, colIndex) => this.shape.map((row) => row[colIndex]));
 
-    this.shape = transposed.map((row) => row.reverse());
+    this.shape = clockwise ? transposed.map((row) => row.reverse()) : transposed.reverse();
     return this;
+  }
+
+  rotateLeft() {
+    return this.#rotate(false);
+  }
+
+  rotateRight() {
+    return this.#rotate(true);
   }
 }
