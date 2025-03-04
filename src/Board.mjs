@@ -20,4 +20,11 @@ export class Board {
   toString() {
     return this.state.map((row) => row.join("") + "\n").join("");
   }
+
+  drop(char) {
+    const col = Math.floor(this.width / 2);
+    if (this.state[0][col] === ".") {
+      this.state[0][col] = char;
+    }
+  }
 }
