@@ -33,6 +33,10 @@ export class Board {
     this.falling = true;
   }
 
+  hasFalling() {
+    return this.falling;
+  }
+
   tick() {
     let movedAnything = false;
     for (let r = this.height - 2; r >= 0; r--) {
