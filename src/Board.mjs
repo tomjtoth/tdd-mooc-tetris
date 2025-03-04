@@ -27,4 +27,14 @@ export class Board {
       this.state[0][col] = char;
     }
   }
+  tick() {
+    for (let r = this.height - 2; r >= 0; r--) {
+      for (let c = 0; c < this.width; c++) {
+        if (this.state[r + 1][c] === "." && this.state[r][c] !== ".") {
+          this.state[r + 1][c] = this.state[r][c];
+          this.state[r][c] = ".";
+        }
+      }
+    }
+  }
 }
