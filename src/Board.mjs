@@ -30,6 +30,12 @@ export class Board {
     return this.state.map((row) => row.join("") + "\n").join("");
   }
 
+  drop2(block) {
+    if (typeof block === "string" && block.length === 1) block = Tetromino._1x1(block);
+    block.centerSelf(this.width);
+    this.falling = block;
+  }
+
   drop(char) {
     if (this.hasFalling()) throw new Error("already falling");
 
