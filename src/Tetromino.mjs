@@ -102,4 +102,14 @@ export class Tetromino extends RotatingShape {
 
     this.top++;
   }
+
+  centerSelf(boardWidth) {
+    this.left = Math.floor(boardWidth / 2 - this.shape[0].length / 2);
+  }
+
+  charAt(ri, ci) {
+    const row = this.shape[ri - this.top];
+    if (row === undefined) return ".";
+    return row[ci - this.left] ?? ".";
+  }
 }
