@@ -20,30 +20,24 @@ export class Board {
     }
   }
 
-  toString2() {
+  toString() {
     return this.state
       .map((row, ri) => row.map((c, ci) => (this.falling ? this.falling.pxAt(ri, ci) ?? c : c)).join("") + "\n")
       .join("");
   }
 
-  toString() {
-    return this.state.map((row) => row.join("") + "\n").join("");
-  }
-
   drop2(block) {
+    if (this.hasFalling()) throw new Error("already falling");
     if (typeof block === "string" && block.length === 1) block = Tetromino._1x1(block);
     block.centerSelf(this.width);
     this.falling = block;
   }
 
   drop(char) {
-    if (this.hasFalling()) throw new Error("already falling");
+    return this.drop2(char);
 
-    const col = Math.floor(this.width / 2);
     if (this.state[0][col] === ".") {
-      this.state[0][col] = char;
     }
-    this.falling = char;
   }
 
   hasFalling() {
@@ -55,7 +49,7 @@ export class Board {
   }
 
   tick() {
-    let movedAnything = false;
+    return this.tick2();
     for (let r = this.height - 2; r >= 0; r--) {
       for (let c = 0; c < this.width; c++) {
         if (this.state[r + 1][c] === "." && this.state[r][c] !== ".") {
