@@ -80,7 +80,7 @@ export class Tetromino extends RotatingShape {
 
     for (let r = this.shape.length - 1; r >= 0; r--) {
       for (let c = 0; c < this.shape[0].length; c++) {
-        if (c in mustBeFree) continue;
+        if (mustBeFree.has(this.left + c)) continue;
 
         if (this.shape[r][c] !== ".") {
           mustBeFree.set(this.left + c, this.top + r + 1);

@@ -38,6 +38,6 @@ export class Board {
   }
 
   tick() {
-    this.falling.lower(this);
+    if (this.falling) this.falling.lower(this);
   }
 }
