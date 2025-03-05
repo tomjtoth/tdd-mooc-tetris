@@ -50,6 +50,10 @@ export class Board {
     return this.falling !== null;
   }
 
+  tick2() {
+    this.falling.lower(this);
+  }
+
   tick() {
     let movedAnything = false;
     for (let r = this.height - 2; r >= 0; r--) {
