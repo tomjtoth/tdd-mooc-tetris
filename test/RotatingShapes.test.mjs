@@ -8,8 +8,8 @@ describe("Rotating 3x3 shape", () => {
   beforeEach(() => {
     shape = RotatingShape.fromString(
       `ABC
-     DEF
-     GHI`
+       DEF
+       GHI`
     );
   });
 
@@ -44,10 +44,10 @@ describe("Rotating 5x5 shape", () => {
   beforeEach(() => {
     shape = RotatingShape.fromString(
       `ABCDE
-     FGHIJ
-     KLMNO
-     PQRST
-     UVWXY`
+       FGHIJ
+       KLMNO
+       PQRST
+       UVWXY`
     );
   });
 
