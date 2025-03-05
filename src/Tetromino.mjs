@@ -26,6 +26,12 @@ export class Tetromino extends RotatingShape {
   validOrientations;
   currentOrientation;
 
+  constructor(shape, currO = 0, validO = [0, 1, 2, 3]) {
+    super(shape);
+    this.currentOrientation = currO;
+    this.validOrientations = validO;
+  }
+
   rotateLeft() {
     return super.rotateLeft();
   }
@@ -35,6 +41,6 @@ export class Tetromino extends RotatingShape {
   }
 
   clone() {
-    return this.constructor.fromString(this.toString());
+    return new Tetromino(this.shape, this.currentOrientation, this.validOrientations);
   }
 }
