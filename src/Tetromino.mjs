@@ -39,6 +39,8 @@ export class Tetromino extends RotatingShape {
 
   validOrientations;
   currentOrientation;
+  left = 0;
+  top = 0;
 
   constructor(shape, currO = 0, validO = 4) {
     super(shape);
@@ -71,5 +73,25 @@ export class Tetromino extends RotatingShape {
    */
   clone() {
     return new Tetromino(this.shape, this.currentOrientation, this.validOrientations);
+  }
+
+  canFall(boardState) {
+    const mustBeFree = new Map();
+
+    for (let r = this.shape.length - 1; r > 0; r--) {
+      for (let c = 0; c < this.shape[0].length; c++) {
+        if (c in mustBeFree) continue;
+
+        if (this.shape[r][c] !== ".") {
+          mustBeFree.set(this.left + c, this.top + r + 1);
+        }
+      }
+    }
+
+    mustBeFree.forEach((row, col) => {
+      if (row > boardState.length || boardState[row][col] !== ".") return false;
+    });
+
+    return true;
   }
 }
