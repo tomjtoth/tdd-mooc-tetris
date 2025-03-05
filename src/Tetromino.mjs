@@ -75,7 +75,7 @@ export class Tetromino extends RotatingShape {
     return new Tetromino(this.shape, this.currentOrientation, this.validOrientations);
   }
 
-  canFall(boardState) {
+  lower(board) {
     const mustBeFree = new Map();
 
     for (let r = this.shape.length - 1; r > 0; r--) {
@@ -89,9 +89,17 @@ export class Tetromino extends RotatingShape {
     }
 
     mustBeFree.forEach((row, col) => {
-      if (row > boardState.length || boardState[row][col] !== ".") return false;
+      if (row > board.height || board.state[row][col] !== ".") {
+        for (let row = 0; row < this.shape.length; row++) {
+          for (let col = 0; col < this.shape[0].length; col++) {
+            const cell = this.shape[row][col];
+            if (cell !== ".") board.state[this.top + row][this.left + col] = cell;
+          }
+        }
+        board.falling = null;
+      }
     });
 
-    return true;
+    this.top++;
   }
 }
