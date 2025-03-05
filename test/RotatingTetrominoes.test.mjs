@@ -1,11 +1,15 @@
-import { describe, test } from "vitest";
+import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { Tetromino } from "../src/Tetromino.mjs";
 
 function distinctOrientations(shape) {
   const distinct = new Set();
-  let goingRight = shape;
-  let goingLeft = shape;
+
+  // goingRight and goingLeft were 2 "pointers" to the same thing,
+  // effectively turning it 90° back and forth...
+  let goingRight = shape.clone();
+  let goingLeft = shape.clone();
+
   for (let i = 0; i < 10; i++) {
     distinct.add(goingRight.toString());
     goingRight = goingRight.rotateRight();
@@ -16,7 +20,10 @@ function distinctOrientations(shape) {
 }
 
 describe("The T shape", () => {
-  const shape = Tetromino.T_SHAPE;
+  let shape;
+  beforeEach(() => {
+    shape = Tetromino.T_SHAPE;
+  });
 
   test("initial orientation", () => {
     expect(shape.toString()).to.equalShape(
@@ -26,7 +33,7 @@ describe("The T shape", () => {
     );
   });
 
-  test.skip("can be rotated right/clockwise", () => {
+  test("can be rotated right/clockwise", () => {
     expect(shape.rotateRight().toString()).to.equalShape(
       `.T.
        .TT
@@ -34,7 +41,7 @@ describe("The T shape", () => {
     );
   });
 
-  test.skip("can be rotated left/counter-clockwise", () => {
+  test("can be rotated left/counter-clockwise", () => {
     expect(shape.rotateLeft().toString()).to.equalShape(
       `.T.
        TT.
@@ -42,7 +49,7 @@ describe("The T shape", () => {
     );
   });
 
-  test.skip("has 4 distinct orientations", () => {
+  test("has 4 distinct orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(4);
   });
 });
