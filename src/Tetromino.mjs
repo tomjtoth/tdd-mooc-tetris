@@ -26,6 +26,14 @@ export class Tetromino extends RotatingShape {
   validOrientations;
   currentOrientation;
 
+  rotateLeft() {
+    return super.rotateLeft();
+  }
+
+  rotateRight() {
+    return super.rotateRight();
+  }
+
   clone() {
     return this.constructor.fromString(this.toString());
   }
