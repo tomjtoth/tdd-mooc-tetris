@@ -58,6 +58,11 @@ export class Tetromino extends RotatingShape {
     return this.validOrientations === 4 ? super.rotateRight() : this.validOrientations === 2 ? this.#rotate2() : this;
   }
 
+  /**
+   * used only during tests
+   *
+   * @returns a new instance with the same shape and orientation
+   */
   clone() {
     return new Tetromino(this.shape, this.currentOrientation, this.validOrientations);
   }
