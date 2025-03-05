@@ -31,11 +31,21 @@ export class Tetromino extends RotatingShape {
   }
 
   rotateLeft() {
-    return super.rotateLeft();
+    return this.validOrientations === 4 ? super.rotateLeft() : this.validOrientations === 2 ? this.#rotate2() : this;
+  }
+
+  #rotate2() {
+    if (this.currentOrientation === 0) {
+      this.currentOrientation++;
+      return super.rotateRight();
+    } else {
+      this.currentOrientation--;
+      return super.rotateLeft();
+    }
   }
 
   rotateRight() {
-    return super.rotateRight();
+    return this.validOrientations === 4 ? super.rotateRight() : this.validOrientations === 2 ? this.#rotate2() : this;
   }
 
   clone() {
