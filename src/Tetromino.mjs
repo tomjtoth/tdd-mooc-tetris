@@ -8,4 +8,8 @@ export class Tetromino extends RotatingShape {
        ...`
     );
   }
+
+  clone() {
+    return this.constructor.fromString(this.toString());
+  }
 }
