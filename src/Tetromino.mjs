@@ -9,6 +9,16 @@ export class Tetromino extends RotatingShape {
     );
   }
 
+  static get I_SHAPE() {
+    return this.fromString(
+      `.....
+       .....
+       IIII.
+       .....
+       .....`
+    );
+  }
+
   clone() {
     return this.constructor.fromString(this.toString());
   }
