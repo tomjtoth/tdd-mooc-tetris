@@ -21,6 +21,16 @@ export class Tetromino extends RotatingShape {
     return shape;
   }
 
+  static get O_SHAPE() {
+    const shape = this.fromString(
+      `.OO
+       .OO
+       ...`
+    );
+    shape.validOrientations = 1;
+    return shape;
+  }
+
   validOrientations;
   currentOrientation;
 
