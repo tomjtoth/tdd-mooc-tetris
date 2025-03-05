@@ -37,19 +37,7 @@ export class Board {
     return this.falling !== null;
   }
 
-  tick2() {
-    this.falling.lower(this);
-  }
-
   tick() {
-    return this.tick2();
-    for (let r = this.height - 2; r >= 0; r--) {
-      for (let c = 0; c < this.width; c++) {
-        if (this.state[r + 1][c] === "." && this.state[r][c] !== ".") {
-          this.state[r][c] = ".";
-          movedAnything = true;
-        }
-      }
-    }
+    this.falling.lower(this);
   }
 }
