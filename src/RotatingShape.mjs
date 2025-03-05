@@ -1,12 +1,12 @@
 export class RotatingShape {
   static fromString(str) {
-    return new this(str);
+    return new this(str.split("\n").map((row) => row.trim().split("")));
   }
 
   shape;
 
-  constructor(str) {
-    this.shape = str.split("\n").map((row) => row.trim().split(""));
+  constructor(shape) {
+    this.shape = shape;
   }
 
   toString() {
