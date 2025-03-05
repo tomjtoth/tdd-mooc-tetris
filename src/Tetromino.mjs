@@ -2,22 +2,29 @@ import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Tetromino extends RotatingShape {
   static get T_SHAPE() {
-    return this.fromString(
+    const shape = this.fromString(
       `.T.
        TTT
        ...`
     );
+    shape.validOrientations = [0, 1, 2, 3];
+    return shape;
   }
 
   static get I_SHAPE() {
-    return this.fromString(
+    const shape = this.fromString(
       `.....
        .....
        IIII.
        .....
        .....`
     );
+    shape.validOrientations = [0, 1];
+    return shape;
   }
+
+  validOrientations;
+  currentOrientation;
 
   clone() {
     return this.constructor.fromString(this.toString());
