@@ -31,6 +31,12 @@ export class Tetromino extends RotatingShape {
     return shape;
   }
 
+  static get ONE_BY_ONE() {
+    const block = this.fromString("1");
+    block.validOrientations = 1;
+    return block;
+  }
+
   validOrientations;
   currentOrientation;
 
