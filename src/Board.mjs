@@ -1,3 +1,5 @@
+import { Tetromino } from "./Tetromino.mjs";
+
 export class Board {
   width;
   height;
@@ -16,6 +18,12 @@ export class Board {
       }
       this.state.push(row);
     }
+  }
+
+  toString2() {
+    return this.state
+      .map((row, ri) => row.map((c, ci) => (this.falling ? this.falling.pxAt(ri, ci) ?? c : c)).join("") + "\n")
+      .join("");
   }
 
   toString() {
