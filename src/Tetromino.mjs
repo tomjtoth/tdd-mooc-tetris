@@ -75,32 +75,36 @@ export class Tetromino extends RotatingShape {
     return new Tetromino(this.shape, this.currentOrientation, this.validOrientations);
   }
 
-  lower(board) {
-    const mustBeFree = new Map();
+  moveDown(board, forced = true) {
+    while (true) {
+      const mustBeFree = new Map();
 
-    for (let r = this.shape.length - 1; r >= 0; r--) {
-      for (let c = 0; c < this.shape[0].length; c++) {
-        if (mustBeFree.has(this.left + c)) continue;
+      for (let r = this.shape.length - 1; r >= 0; r--) {
+        for (let c = 0; c < this.shape[0].length; c++) {
+          if (mustBeFree.has(this.left + c)) continue;
 
-        if (this.shape[r][c] !== ".") {
-          mustBeFree.set(this.left + c, this.top + r + 1);
-        }
-      }
-    }
-
-    mustBeFree.forEach((row, col) => {
-      if (row > board.height - 1 || board.state[row][col] !== ".") {
-        for (let row = 0; row < this.shape.length; row++) {
-          for (let col = 0; col < this.shape[0].length; col++) {
-            const cell = this.shape[row][col];
-            if (cell !== ".") board.state[this.top + row][this.left + col] = cell;
+          if (this.shape[r][c] !== ".") {
+            mustBeFree.set(this.left + c, this.top + r + 1);
           }
         }
-        board.falling = null;
       }
-    });
 
-    this.top++;
+      mustBeFree.forEach((row, col) => {
+        if (row > board.height - 1 || board.state[row][col] !== ".") {
+          for (let row = 0; row < this.shape.length; row++) {
+            for (let col = 0; col < this.shape[0].length; col++) {
+              const cell = this.shape[row][col];
+              if (cell !== ".") board.state[this.top + row][this.left + col] = cell;
+            }
+          }
+          board.falling = null;
+          forced = false;
+        }
+      });
+
+      this.top++;
+      if (!forced) break;
+    }
   }
 
   centerSelf(boardWidth) {
