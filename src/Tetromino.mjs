@@ -31,8 +31,8 @@ export class Tetromino extends RotatingShape {
     return shape;
   }
 
-  static get ONE_BY_ONE() {
-    const block = this.fromString("1");
+  static _1x1(str = "1") {
+    const block = this.fromString(str);
     block.validOrientations = 1;
     return block;
   }
@@ -78,7 +78,7 @@ export class Tetromino extends RotatingShape {
   lower(board) {
     const mustBeFree = new Map();
 
-    for (let r = this.shape.length - 1; r > 0; r--) {
+    for (let r = this.shape.length - 1; r >= 0; r--) {
       for (let c = 0; c < this.shape[0].length; c++) {
         if (c in mustBeFree) continue;
 
@@ -89,7 +89,7 @@ export class Tetromino extends RotatingShape {
     }
 
     mustBeFree.forEach((row, col) => {
-      if (row > board.height || board.state[row][col] !== ".") {
+      if (row > board.height - 1 || board.state[row][col] !== ".") {
         for (let row = 0; row < this.shape.length; row++) {
           for (let col = 0; col < this.shape[0].length; col++) {
             const cell = this.shape[row][col];
@@ -107,9 +107,11 @@ export class Tetromino extends RotatingShape {
     this.left = Math.floor(boardWidth / 2 - this.shape[0].length / 2);
   }
 
-  charAt(ri, ci) {
+  pxAt(ri, ci) {
     const row = this.shape[ri - this.top];
-    if (row === undefined) return ".";
-    return row[ci - this.left] ?? ".";
+    if (!row) return;
+
+    const px = row[ci - this.left];
+    if (px && px !== ".") return px;
   }
 }
