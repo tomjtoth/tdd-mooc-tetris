@@ -2,13 +2,11 @@ import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Tetromino extends RotatingShape {
   static get T_SHAPE() {
-    const shape = this.fromString(
+    return this.fromString(
       `.T.
        TTT
        ...`
     );
-    shape.validOrientations = [0, 1, 2, 3];
-    return shape;
   }
 
   static get I_SHAPE() {
@@ -19,14 +17,14 @@ export class Tetromino extends RotatingShape {
        .....
        .....`
     );
-    shape.validOrientations = [0, 1];
+    shape.validOrientations = 2;
     return shape;
   }
 
   validOrientations;
   currentOrientation;
 
-  constructor(shape, currO = 0, validO = [0, 1, 2, 3]) {
+  constructor(shape, currO = 0, validO = 4) {
     super(shape);
     this.currentOrientation = currO;
     this.validOrientations = validO;
