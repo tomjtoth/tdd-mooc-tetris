@@ -40,4 +40,8 @@ export class Board {
   tick() {
     if (this.falling) this.falling.moveDown(this, false);
   }
+
+  moveLeft() {
+    if (this.falling) this.falling.moveLeft(this);
+  }
 }
