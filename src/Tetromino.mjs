@@ -48,6 +48,14 @@ export class Tetromino extends RotatingShape {
     this.validOrientations = validO;
   }
 
+  get #width() {
+    return this.shape[0].length;
+  }
+
+  get #height() {
+    return this.shape.length;
+  }
+
   rotateLeft() {
     return this.validOrientations === 4 ? super.rotateLeft() : this.validOrientations === 2 ? this.#rotate2() : this;
   }
@@ -79,8 +87,8 @@ export class Tetromino extends RotatingShape {
     while (true) {
       const mustBeFree = new Map();
 
-      for (let r = this.shape.length - 1; r >= 0; r--) {
-        for (let c = 0; c < this.shape[0].length; c++) {
+      for (let r = this.#height - 1; r >= 0; r--) {
+        for (let c = 0; c < this.#width; c++) {
           if (mustBeFree.has(this.left + c)) continue;
 
           if (this.shape[r][c] !== ".") {
@@ -91,8 +99,8 @@ export class Tetromino extends RotatingShape {
 
       mustBeFree.forEach((row, col) => {
         if (row > board.height - 1 || board.state[row][col] !== ".") {
-          for (let row = 0; row < this.shape.length; row++) {
-            for (let col = 0; col < this.shape[0].length; col++) {
+          for (let row = 0; row < this.#height; row++) {
+            for (let col = 0; col < this.#width; col++) {
               const cell = this.shape[row][col];
               if (cell !== ".") board.state[this.top + row][this.left + col] = cell;
             }
@@ -108,7 +116,7 @@ export class Tetromino extends RotatingShape {
   }
 
   centerSelf(boardWidth) {
-    this.left = Math.floor(boardWidth / 2 - this.shape[0].length / 2);
+    this.left = Math.floor(boardWidth / 2 - this.#width / 2);
   }
 
   pxAt(ri, ci) {
