@@ -117,6 +117,27 @@ export class Tetromino extends RotatingShape {
     }
   }
 
+  moveLeft(board) {
+    const mustBeFree = new Map();
+
+    for (let r = 0; r < this.#height; r++) {
+      for (let c = 0; c < this.#width; c++) {
+        if (this.shape[r][c] !== ".") {
+          mustBeFree.set(this.left + c - 1, this.top + r);
+          break;
+        }
+      }
+    }
+
+    mustBeFree.forEach((r, c) => {
+      if (c < 0 || board.state[r][c] !== ".") {
+        return;
+      }
+    });
+
+    this.left--;
+  }
+
   centerSelf(boardWidth) {
     this.left = Math.floor(boardWidth / 2 - this.#width / 2);
   }
