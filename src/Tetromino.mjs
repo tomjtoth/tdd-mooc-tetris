@@ -10,31 +10,33 @@ export class Tetromino extends RotatingShape {
   }
 
   static get I_SHAPE() {
-    const shape = this.fromString(
+    return this.fromString(
       `.....
        .....
        IIII.
        .....
-       .....`
+       .....`,
+      2
     );
-    shape.validOrientations = 2;
-    return shape;
   }
 
   static get O_SHAPE() {
-    const shape = this.fromString(
+    return this.fromString(
       `.OO
        .OO
-       ...`
+       ...`,
+      1
     );
-    shape.validOrientations = 1;
-    return shape;
   }
 
   static _1x1(str = "1") {
-    const block = this.fromString(str);
-    block.validOrientations = 1;
-    return block;
+    return this.fromString(str, 1);
+  }
+
+  static fromString(str, validO) {
+    const res = super.fromString(str);
+    if (validO) res.validOrientations = validO;
+    return res;
   }
 
   validOrientations;
