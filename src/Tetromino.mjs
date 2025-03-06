@@ -59,7 +59,7 @@ export class Tetromino extends RotatingShape {
   }
 
   rotateLeft(board) {
-    const checkpoint = this.shape;
+    const checkpoint = { shape: this.shape, left: this.left };
 
     if (this.validOrientations === 4) {
       super.rotateLeft();
@@ -71,8 +71,15 @@ export class Tetromino extends RotatingShape {
       outer: for (let r = 0; r < board.height; r++) {
         for (let c = 0; c < board.width; c++) {
           if (board.state[r][c] !== "." && this.pxAt(r, c)) {
-            this.shape = checkpoint;
-            break outer;
+            this.moveRight(board);
+            if (this.left === checkpoint.left) {
+              this.moveLeft(board);
+            }
+
+            if (this.left === checkpoint.left) {
+              this.shape = checkpoint.shape;
+              break outer;
+            }
           }
         }
       }
