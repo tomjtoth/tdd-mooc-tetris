@@ -58,122 +58,187 @@ describe("Falling tetrominoes", () => {
     );
   });
 
-  test("can be moved left", () => {
-    board.drop(Tetromino.T_SHAPE);
-    board.moveLeft();
+  describe("can be moved leftwards", () => {
+    test("1 block if no obstacle", () => {
+      board.drop(Tetromino.T_SHAPE);
+      board.moveLeft();
 
-    expect(board.toString()).to.equalShape(
-      `...T......
-       ..TTT.....
-       ..........
-       ..........
-       ..........
-       ..........`
-    );
+      expect(board.toString()).to.equalShape(
+        `...T......
+         ..TTT.....
+         ..........
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
+    test("but not through blocks", () => {
+      board.state[0][0] = "x";
+      board.state[0][1] = "x";
+      board.state[1][0] = "x";
+
+      board.drop(Tetromino.T_SHAPE);
+
+      board.moveLeft();
+      board.moveLeft();
+      board.moveLeft();
+      board.moveLeft();
+
+      expect(board.toString()).to.equalShape(
+        `xxT.......
+         xTTT......
+         ..........
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
+    test("but not off the board", () => {
+      board.drop(Tetromino.T_SHAPE);
+
+      board.moveLeft();
+      board.moveLeft();
+      board.moveLeft();
+      board.moveLeft();
+      board.moveLeft();
+      board.moveLeft();
+      board.moveLeft();
+
+      expect(board.toString()).to.equalShape(
+        `.T........
+         TTT.......
+         ..........
+         ..........
+         ..........
+         ..........`
+      );
+    });
   });
 
-  test("cannot be moved left through blocks", () => {
-    board.state[0][0] = "x";
-    board.state[0][1] = "x";
-    board.state[1][0] = "x";
+  describe("can be moved rightwards", () => {
+    test("1 block if not obstacle", () => {
+      board.drop(Tetromino.T_SHAPE);
+      board.moveRight();
 
-    board.drop(Tetromino.T_SHAPE);
+      expect(board.toString()).to.equalShape(
+        `.....T....
+         ....TTT...
+         ..........
+         ..........
+         ..........
+         ..........`
+      );
+    });
 
-    board.moveLeft();
-    board.moveLeft();
-    board.moveLeft();
-    board.moveLeft();
+    test("but not through blocks", () => {
+      board.state[0][8] = "x";
+      board.state[0][9] = "x";
+      board.state[1][9] = "x";
 
-    expect(board.toString()).to.equalShape(
-      `xxT.......
-       xTTT......
-       ..........
-       ..........
-       ..........
-       ..........`
-    );
+      board.drop(Tetromino.T_SHAPE);
+
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+
+      expect(board.toString()).to.equalShape(
+        `.......Txx
+         ......TTTx
+         ..........
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
+    test("but not off the board", () => {
+      board.drop(Tetromino.T_SHAPE);
+
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+      board.moveRight();
+
+      expect(board.toString()).to.equalShape(
+        `........T.
+         .......TTT
+         ..........
+         ..........
+         ..........
+         ..........`
+      );
+    });
   });
 
-  test("cannot be moved left off the board", () => {
-    board.drop(Tetromino.T_SHAPE);
+  describe("can be moved downwards", () => {
+    test("1 block if no obstacles", () => {
+      board.drop(Tetromino.T_SHAPE);
+      board.moveDown();
 
-    board.moveLeft();
-    board.moveLeft();
-    board.moveLeft();
-    board.moveLeft();
-    board.moveLeft();
-    board.moveLeft();
-    board.moveLeft();
+      expect(board.toString()).to.equalShape(
+        `..........
+         ....T.....
+         ...TTT....
+         ..........
+         ..........
+         ..........`
+      );
+    });
 
-    expect(board.toString()).to.equalShape(
-      `.T........
-       TTT.......
+    test("but not through blocks", () => {
+      board.state[4][5] = "x";
+      board.state[5][4] = "x";
+      board.state[5][5] = "x";
+
+      board.drop(Tetromino.T_SHAPE);
+
+      board.moveDown();
+      board.moveDown();
+      board.moveDown();
+      board.moveDown();
+      expect(board.hasFalling()).to.be.false;
+      board.moveDown();
+      board.moveDown();
+      board.moveDown();
+
+      expect(board.toString()).to.equalShape(
+        `..........
+         ..........
+         ....T.....
+         ...TTT....
+         .....x....
+         ....xx....`
+      );
+    });
+
+    test("but not off the board", () => {
+      board.drop(Tetromino.T_SHAPE);
+      board.moveDown();
+      board.moveDown();
+      board.moveDown();
+      board.moveDown();
+      board.moveDown();
+      board.moveDown();
+      board.moveDown();
+
+      expect(board.toString()).to.equalShape(
+        `..........
        ..........
        ..........
        ..........
-       ..........`
-    );
+       ....T.....
+       ...TTT....`
+      );
+    });
   });
-
-  test("can be moved right", () => {
-    board.drop(Tetromino.T_SHAPE);
-    board.moveRight();
-
-    expect(board.toString()).to.equalShape(
-      `.....T....
-       ....TTT...
-       ..........
-       ..........
-       ..........
-       ..........`
-    );
-  });
-
-  test("cannot be moved right through blocks", () => {
-    board.state[0][8] = "x";
-    board.state[0][9] = "x";
-    board.state[1][9] = "x";
-
-    board.drop(Tetromino.T_SHAPE);
-
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-
-    expect(board.toString()).to.equalShape(
-      `.......Txx
-       ......TTTx
-       ..........
-       ..........
-       ..........
-       ..........`
-    );
-  });
-
-  test("cannot be moved right off the board", () => {
-    board.drop(Tetromino.T_SHAPE);
-
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-    board.moveRight();
-
-    expect(board.toString()).to.equalShape(
-      `........T.
-       .......TTT
-       ..........
-       ..........
-       ..........
-       ..........`
-    );
-  });
-
 });

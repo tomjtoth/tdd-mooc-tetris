@@ -85,7 +85,7 @@ export class Tetromino extends RotatingShape {
     return new Tetromino(this.shape, this.currentOrientation, this.validOrientations);
   }
 
-  moveDown(board, forced = true) {
+  moveDown(board, forced = false) {
     while (true) {
       const mustBeFree = new Map();
 

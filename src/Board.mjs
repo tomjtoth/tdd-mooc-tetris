@@ -38,7 +38,11 @@ export class Board {
   }
 
   tick() {
-    if (this.falling) this.falling.moveDown(this, false);
+    if (this.falling) this.falling.moveDown(this);
+  }
+
+  moveDown() {
+    if (this.falling) this.falling.moveDown(this);
   }
 
   moveLeft() {
