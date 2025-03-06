@@ -52,4 +52,12 @@ export class Board {
   moveRight() {
     if (this.falling) this.falling.moveRight(this);
   }
+
+  rotateLeft() {
+    if (this.falling) this.falling.rotateLeft(this);
+  }
+
+  rotateRight() {
+    if (this.falling) this.falling.rotateRight(this);
+  }
 }
