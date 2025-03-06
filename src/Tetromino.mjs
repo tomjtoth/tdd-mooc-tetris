@@ -129,11 +129,11 @@ export class Tetromino extends RotatingShape {
       }
     }
 
-    mustBeFree.forEach((r, c) => {
+    for (const [c, r] of mustBeFree) {
       if (c < 0 || board.state[r][c] !== ".") {
         return;
       }
-    });
+    }
 
     this.left--;
   }
