@@ -7,14 +7,13 @@ function distinctOrientations(shape) {
 
   // goingRight and goingLeft were 2 "pointers" to the same thing,
   // effectively turning it 90° back and forth...
-  let goingRight = shape.clone();
-  let goingLeft = shape.clone();
+  // also class Tetromino keeps track of it's own orientation
+  const goingRight = shape.clone();
+  const goingLeft = shape.clone();
 
   for (let i = 0; i < 10; i++) {
-    distinct.add(goingRight.toString());
-    goingRight = goingRight.rotateRight();
-    distinct.add(goingLeft.toString());
-    goingLeft = goingLeft.rotateLeft();
+    distinct.add(goingRight.rotateRight().toString());
+    distinct.add(goingLeft.rotateLeft().toString());
   }
   return distinct;
 }
