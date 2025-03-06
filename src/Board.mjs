@@ -44,4 +44,8 @@ export class Board {
   moveLeft() {
     if (this.falling) this.falling.moveLeft(this);
   }
+
+  moveRight() {
+    if (this.falling) this.falling.moveRight(this);
+  }
 }
