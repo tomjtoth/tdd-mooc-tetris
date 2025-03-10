@@ -50,6 +50,18 @@ export class Tetromino extends RotatingShape {
     this.validOrientations = validO;
   }
 
+  get #ownCoords() {
+    const coords = [];
+
+    for (let r = 0; r < this.#height; r++) {
+      for (let c = 0; c < this.#width; c++) {
+        if (this.shape[r][c] !== ".") coords.push([this.top + r, this.left + c]);
+      }
+    }
+
+    return coords;
+  }
+
   get #width() {
     return this.shape[0].length;
   }
