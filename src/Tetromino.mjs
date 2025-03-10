@@ -80,6 +80,13 @@ export class Tetromino extends RotatingShape {
     }
 
     if (board) {
+      while (this.#ownCoords.find(([, c]) => c < 0)) {
+        this.moveRight(board);
+        if (this.left === checkpoint.left) {
+          this.shape = checkpoint.shape;
+          return this;
+        }
+      }
       outer: for (let r = 0; r < board.height; r++) {
         for (let c = 0; c < board.width; c++) {
           if (board.state[r][c] !== "." && this.pxAt(r, c)) {
