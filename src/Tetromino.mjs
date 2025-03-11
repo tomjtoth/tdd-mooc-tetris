@@ -70,6 +70,17 @@ export class Tetromino extends RotatingShape {
     return this.shape.length;
   }
 
+  #overlaps(board) {
+    for (let r = 0; r < board.height; r++) {
+      for (let c = 0; c < board.width; c++) {
+        if (board.state[r][c] !== "." && this.pxAt(r, c)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   rotateLeft(board) {
     const checkpoint = { shape: this.shape, left: this.left };
 
