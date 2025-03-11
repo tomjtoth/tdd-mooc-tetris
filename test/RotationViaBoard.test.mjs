@@ -64,22 +64,108 @@ describe("rotating Tetrominoes in context of board", () => {
       expect(board.hasFalling()).to.be.true;
     });
 
-    test("is a no-op mid-field without enough space", () => {
+    test("succeeds by moving 1 block to the left mid-field without enough space", () => {
       board.drop(Tetromino.T_SHAPE);
-      board.state[2][3] = "x";
       board.state[2][4] = "x";
       board.state[2][5] = "x";
 
       board.rotateLeft();
       expect(board.toString()).to.equalShape(
-        `....T.....
-         ...TTT....
-         ...xxx....
+        `...T......
+         ..TT......
+         ...Txx....
          ..........
          ..........
          ..........`
       );
       expect(board.hasFalling()).to.be.true;
     });
+
+    test("T_SHAPE succeeds with wall-kick", () => {
+      board.drop(Tetromino.T_SHAPE);
+
+      board.rotateLeft();
+      board.rotateLeft();
+      board.rotateLeft();
+
+      board.falling.left = -1;
+
+      expect(board.toString()).to.equalShape(
+        `T.........
+         TT........
+         T.........
+         ..........
+         ..........
+         ..........`
+      );
+
+      board.rotateLeft();
+
+      expect(board.toString()).to.equalShape(
+        `.T........
+         TTT.......
+         ..........
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
+    test("I_SHAPE succeeds with the wall on the left", () => {
+      board.drop(Tetromino.I_SHAPE);
+
+      board.rotateLeft();
+
+      board.falling.left = -2;
+
+      expect(board.toString()).to.equalShape(
+        `I.........
+         I.........
+         I.........
+         I.........
+         ..........
+         ..........`
+      );
+
+      board.rotateLeft();
+
+      expect(board.toString()).to.equalShape(
+        `..........
+         ..........
+         IIII......
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
+    test("I_SHAPE succeeds with wall on the right", () => {
+      board.drop(Tetromino.I_SHAPE);
+
+      board.rotateLeft();
+
+      board.falling.left = board.width - 3;
+
+      expect(board.toString()).to.equalShape(
+        `.........I
+         .........I
+         .........I
+         .........I
+         ..........
+         ..........`
+      );
+
+      board.rotateLeft();
+
+      expect(board.toString()).to.equalShape(
+        `..........
+         ..........
+         ......IIII
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
   });
 });
