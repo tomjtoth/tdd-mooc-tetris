@@ -104,6 +104,27 @@ export class Arika {
     this.#top++;
   }
 
+  moveLeft(board) {
+    const mustBeFree = new Map();
+
+    for (let r = 0; r < this.#height; r++) {
+      for (let c = 0; c < this.#width; c++) {
+        if (this.#shape[r][c] !== ".") {
+          mustBeFree.set(this.#left + c - 1, this.#top + r);
+          break;
+        }
+      }
+    }
+
+    for (const [c, r] of mustBeFree) {
+      if (c < 0 || board.state[r][c] !== ".") {
+        return;
+      }
+    }
+
+    this.#left--;
+  }
+
 }
 
 export class Tetromino extends RotatingShape {
