@@ -14,6 +14,17 @@ export class Arika {
     if (cloning) this.#state = state;
   }
 
+  get #shape() {
+    return this.#orientations[this.#orIndex];
+  }
+
+  get #height() {
+    return this.#shape.length;
+  }
+
+  get #width() {
+    return this.#shape[0].length;
+  }
 }
 
 export class Tetromino extends RotatingShape {
