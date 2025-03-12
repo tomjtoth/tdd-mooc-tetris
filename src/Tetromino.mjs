@@ -25,6 +25,19 @@ export class Arika {
   get #width() {
     return this.#shape[0].length;
   }
+
+  get #state() {
+    return { orIndex: this.#orIndex, left: this.#left, top: this.#top };
+  }
+
+  set #state(saved) {
+    this.#orIndex = saved.orIndex;
+    this.#left = saved.left;
+    this.#top = saved.top;
+
+    console.debug("state set to", saved);
+  }
+
 }
 
 export class Tetromino extends RotatingShape {
