@@ -62,6 +62,14 @@ export class Arika {
     this.#left = Math.floor(boardWidth / 2 - this.#width / 2);
   }
 
+  pxAt(r, c) {
+    const row = this.#shape[r - this.#top];
+    if (!row) return;
+
+    const px = row[c - this.#left];
+    if (px && px !== ".") return px;
+  }
+
 }
 
 export class Tetromino extends RotatingShape {
