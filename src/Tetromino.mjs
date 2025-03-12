@@ -101,6 +101,20 @@ export class Arika {
     ]);
   }
 
+  static get Z_SHAPE() {
+    return new this([
+      `....
+       ZZ..
+       .ZZ.
+       ....`,
+
+      `..Z.
+       .ZZ.
+       .Z..
+       ....`,
+    ]);
+  }
+
 
   static _1x1(x) {
     return new this([`.\n${x}`]);
