@@ -5,6 +5,7 @@ export class Arika {
   #top = -1;
   #orientations;
   #orIndex = 0;
+  #checkpoint;
 
   constructor(orientations, { state, cloning = false } = {}) {
     this.#orientations = cloning
@@ -48,6 +49,14 @@ export class Arika {
     this.#top = saved.top;
 
     console.debug("state set to", saved);
+  }
+
+  #saveState() {
+    this.#checkpoint = this.#state;
+  }
+
+  #loadState() {
+    this.#state = this.#checkpoint;
   }
 
   toString() {
