@@ -1,6 +1,10 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Arika {
+  static _1x1(x) {
+    return new this([`.\n${x}`]);
+  }
+
   #left = 0;
   #top = -1;
   #orientations;
