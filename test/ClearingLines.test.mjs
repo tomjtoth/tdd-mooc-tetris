@@ -38,7 +38,7 @@ describe("Clearing lines", () => {
     );
   });
 
-  test.skip("new empty line gets inserted on top", () => {
+  test("new empty line gets inserted on top", () => {
     for (let i = 0; i < 6; i++) {
       board.state[i][0] = i;
     }
@@ -68,7 +68,7 @@ describe("Clearing lines", () => {
     );
   });
 
-  test.skip("keeps partial lines unaffected", () => {
+  test("keeps partial lines unaffected", () => {
     for (let i = 0; i < 6; i++) {
       board.state[i][i] = "x";
       board.state[i][i + 4] = "x";
@@ -111,7 +111,7 @@ describe("Clearing lines", () => {
     );
   });
 
-  test.skip("does not get triggered until a block is only falling", () => {
+  test("does not get triggered until a block is only falling", () => {
     for (let i = 4; i < 10; i++) {
       board.state[5][i] = "x";
     }

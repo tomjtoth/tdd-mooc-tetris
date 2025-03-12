@@ -61,6 +61,7 @@ export class Board {
 
   tick() {
     if (this.falling) this.falling.moveDown(this);
+    this.#clearLines();
   }
 
   moveDown() {
