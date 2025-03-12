@@ -1,5 +1,21 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
+export class Arika {
+  #left = 0;
+  #top = -1;
+  #orientations;
+  #orIndex = 0;
+
+  constructor(orientations, { state, cloning = false } = {}) {
+    this.#orientations = cloning
+      ? orientations
+      : orientations.map((str) => str.split("\n").map((row) => row.trim().split("")));
+
+    if (cloning) this.#state = state;
+  }
+
+}
+
 export class Tetromino extends RotatingShape {
   static get T_SHAPE() {
     return this.fromString(
