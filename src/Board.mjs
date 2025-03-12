@@ -49,6 +49,16 @@ export class Board {
     return this.falling !== null;
   }
 
+  #clearLines() {
+    outer: for (let r = 0; r < this.height; r++) {
+      for (let c = 0; c < this.width; c++) {
+        if (this.state[r][c] === ".") continue outer;
+      }
+      const emptyLine = this.state.splice(r, 1)[0].map((_) => ".");
+      this.state.splice(0, 0, emptyLine);
+    }
+  }
+
   tick() {
     if (this.falling) this.falling.moveDown(this);
   }
