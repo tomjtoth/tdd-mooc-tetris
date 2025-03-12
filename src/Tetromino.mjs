@@ -78,6 +78,21 @@ export class Arika {
     const px = row[c - this.#left];
     if (px && px !== ".") return px;
   }
+
+  #overlaps(board) {
+    let left = 0;
+    let right = 0;
+
+    this.#ownCoords.forEach(({ row, col }) => {
+      if (board.state[row][col] !== ".") {
+        if (col < 2) left++;
+        else right++;
+      }
+    });
+
+    return left > 0 || right > 0 ? { moveLeft: left - right < 0 } : null;
+  }
+
   #rotate(board, CW = true) {
     if (board) this.#saveState();
 
