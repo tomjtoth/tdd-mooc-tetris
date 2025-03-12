@@ -63,6 +63,30 @@ export class Arika {
     ]);
   }
 
+  static get J_SHAPE() {
+    return new this([
+      `....
+       JJJ.
+       ..J.
+       ....`,
+
+      `.J..
+       .J..
+       JJ..
+       ....`,
+
+      `....
+       J...
+       JJJ.
+       ....`,
+
+      `.JJ.
+       .J..
+       .J..
+       ....`,
+    ]);
+  }
+
 
   static _1x1(x) {
     return new this([`.\n${x}`]);
