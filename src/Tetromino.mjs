@@ -90,6 +90,14 @@ export class Arika {
     return this;
   }
 
+  rotateLeft(board) {
+    return this.#rotate(board, false);
+  }
+
+  rotateRight(board) {
+    return this.#rotate(board, true);
+  }
+
   #finalize(board) {
     this.#ownCoords.forEach(({ row, col }) => {
       if (row >= 0 && row < board.height && col >= 0 && col < board.width) board.state[row][col] = this.pxAt(row, col);
