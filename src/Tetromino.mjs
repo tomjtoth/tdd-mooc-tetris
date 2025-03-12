@@ -39,6 +39,30 @@ export class Arika {
     ]);
   }
 
+  static get L_SHAPE() {
+    return new this([
+      `....
+       LLL.
+       L...
+       ....`,
+
+      `LL..
+       .L..
+       .L..
+       ....`,
+
+      `....
+       ..L.
+       LLL.
+       ....`,
+
+      `.L..
+       .L..
+       .LL.
+       ....`,
+    ]);
+  }
+
 
   static _1x1(x) {
     return new this([`.\n${x}`]);
