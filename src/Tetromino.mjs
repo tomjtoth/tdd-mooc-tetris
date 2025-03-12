@@ -130,6 +130,7 @@ export class Arika {
       if (--this.#orIndex < 0) this.#orIndex += this.#orientations.length;
     }
 
+    if (board) this.#postRotate(board);
     return this;
   }
 
