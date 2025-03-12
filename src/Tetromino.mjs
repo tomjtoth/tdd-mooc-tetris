@@ -87,6 +87,20 @@ export class Arika {
     ]);
   }
 
+  static get S_SHAPE() {
+    return new this([
+      `....
+       .SS.
+       SS..
+       ....`,
+
+      `S...
+       SS..
+       .S..
+       ....`,
+    ]);
+  }
+
 
   static _1x1(x) {
     return new this([`.\n${x}`]);
