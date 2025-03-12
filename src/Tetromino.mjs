@@ -1,6 +1,30 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Arika {
+  static get T_SHAPE() {
+    return new this([
+      `....
+       TTT.
+       .T..
+       ....`,
+
+      `.T..
+       TT..
+       .T..
+       ....`,
+
+      `....
+       .T..
+       TTT.
+       ....`,
+
+      `.T..
+       .TT.
+       .T..
+       ....`,
+    ]);
+  }
+
   static _1x1(x) {
     return new this([`.\n${x}`]);
   }
