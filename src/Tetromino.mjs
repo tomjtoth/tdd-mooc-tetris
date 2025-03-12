@@ -78,6 +78,13 @@ export class Arika {
     const px = row[c - this.#left];
     if (px && px !== ".") return px;
   }
+  #finalize(board) {
+    this.#ownCoords.forEach(({ row, col }) => {
+      if (row >= 0 && row < board.height && col >= 0 && col < board.width) board.state[row][col] = this.pxAt(row, col);
+    });
+    board.falling = null;
+    return this;
+  }
 
   moveDown(board) {
     const mustBeFree = new Map();
