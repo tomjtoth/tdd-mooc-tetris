@@ -22,7 +22,19 @@ export class Board {
 
   toString() {
     return this.state
-      .map((row, ri) => row.map((c, ci) => (this.falling ? this.falling.pxAt(ri, ci) ?? c : c)).join("") + "\n")
+      .map(
+        (row, ri) =>
+          row
+            .map((cell, ci) => {
+              let px;
+
+              if (this.falling) px = this.falling.pxAt(ri, ci);
+              if (!px) px = cell;
+
+              return px;
+            })
+            .join("") + "\n"
+      )
       .join("");
   }
 
