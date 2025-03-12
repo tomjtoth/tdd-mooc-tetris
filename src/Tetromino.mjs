@@ -93,6 +93,34 @@ export class Arika {
     return left > 0 || right > 0 ? { moveLeft: left - right < 0 } : null;
   }
 
+  #postRotate(board) {
+    if (this.#ownCoords.find(({ row }) => row < 0)) {
+      this.#top++;
+    }
+
+    let prevLeft = this.#checkpoint.left;
+    while (this.#ownCoords.find(({ col }) => col < 0)) {
+      this.moveRight(board);
+      if (this.#left === prevLeft) return this.#loadState();
+      prevLeft = this.#left;
+    }
+
+    while (this.#ownCoords.find(({ col }) => col >= board.width)) {
+      this.moveLeft(board);
+      if (this.#left === prevLeft) return this.#loadState();
+      prevLeft = this.#left;
+    }
+
+    let overlaps;
+    while ((overlaps = this.#overlaps(board))) {
+      if (overlaps.moveLeft) this.moveLeft(board);
+      else this.moveLeft(board);
+      if (this.#left === prevLeft) return this.#loadState();
+
+      prevLeft = this.#left;
+    }
+  }
+
   #rotate(board, CW = true) {
     if (board) this.#saveState();
 
