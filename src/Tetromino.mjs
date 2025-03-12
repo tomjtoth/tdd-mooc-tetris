@@ -1,6 +1,6 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
-export class Arika {
+export class Tetromino {
   static get T_SHAPE() {
     return new this([
       `....
@@ -338,7 +338,7 @@ export class Arika {
   }
 }
 
-export class Tetromino extends RotatingShape {
+export class Old extends RotatingShape {
   static get T_SHAPE() {
     return this.fromString(
       `.T.
@@ -485,7 +485,7 @@ export class Tetromino extends RotatingShape {
    * @returns a new instance with the same shape and orientation
    */
   clone() {
-    return new Tetromino(this.shape, this.currentOrientation, this.validOrientations);
+    return new Old(this.shape, this.currentOrientation, this.validOrientations);
   }
 
   moveDown(board, forced = false) {
