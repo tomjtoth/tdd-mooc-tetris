@@ -97,6 +97,10 @@ export class Arika {
       }
     }
 
+    for (const [c, r] of mustBeFree) {
+      if (r >= board.height || board.state[r][c] !== ".") return this.#finalize(board);
+    }
+
     this.#top++;
   }
 
