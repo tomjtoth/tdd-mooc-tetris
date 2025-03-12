@@ -115,6 +115,14 @@ export class Arika {
     ]);
   }
 
+  static get O_SHAPE() {
+    return new this([
+      `....
+       .OO.
+       .OO.
+       ....`,
+    ]);
+  }
 
   static _1x1(x) {
     return new this([`.\n${x}`]);
