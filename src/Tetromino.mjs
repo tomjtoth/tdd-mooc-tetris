@@ -26,6 +26,18 @@ export class Arika {
     return this.#shape[0].length;
   }
 
+  get #ownCoords() {
+    const coords = [];
+
+    for (let r = 0; r < this.#height; r++) {
+      for (let c = 0; c < this.#width; c++) {
+        if (this.#shape[r][c] !== ".") coords.push({ row: this.#top + r, col: this.#left + c });
+      }
+    }
+
+    return coords;
+  }
+
   get #state() {
     return { orIndex: this.#orIndex, left: this.#left, top: this.#top };
   }
