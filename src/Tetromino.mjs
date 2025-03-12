@@ -79,6 +79,20 @@ export class Arika {
     if (px && px !== ".") return px;
   }
 
+  moveDown(board) {
+    const mustBeFree = new Map();
+
+    for (let r = this.#height - 1; r >= 0; r--) {
+      for (let c = 0; c < this.#width; c++) {
+        if (mustBeFree.has(this.#left + c)) continue;
+
+        if (this.#shape[r][c] !== ".") mustBeFree.set(this.#left + c, this.#top + r + 1);
+      }
+    }
+
+    this.#top++;
+  }
+
 }
 
 export class Tetromino extends RotatingShape {
