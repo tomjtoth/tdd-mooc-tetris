@@ -25,6 +25,21 @@ export class Arika {
     ]);
   }
 
+  static get I_SHAPE() {
+    return new this([
+      `....
+       IIII
+       ....
+       ....`,
+
+      `..I.
+       ..I.
+       ..I.
+       ..I.`,
+    ]);
+  }
+
+
   static _1x1(x) {
     return new this([`.\n${x}`]);
   }
