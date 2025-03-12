@@ -78,6 +78,18 @@ export class Arika {
     const px = row[c - this.#left];
     if (px && px !== ".") return px;
   }
+  #rotate(board, CW = true) {
+    if (board) this.#saveState();
+
+    if (CW) {
+      if (++this.#orIndex == this.#orientations.length) this.#orIndex = 0;
+    } else {
+      if (--this.#orIndex < 0) this.#orIndex += this.#orientations.length;
+    }
+
+    return this;
+  }
+
   #finalize(board) {
     this.#ownCoords.forEach(({ row, col }) => {
       if (row >= 0 && row < board.height && col >= 0 && col < board.width) board.state[row][col] = this.pxAt(row, col);
