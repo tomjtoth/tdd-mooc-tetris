@@ -38,6 +38,18 @@ export class Arika {
     console.debug("state set to", saved);
   }
 
+  toString() {
+    return this.#shape.map((row) => row.join("") + "\n").join("");
+  }
+
+  clone() {
+    return new this.constructor(this.#orientations, { cloning: true, state: this.#state });
+  }
+
+  centerSelf(boardWidth) {
+    this.#left = Math.floor(boardWidth / 2 - this.#width / 2);
+  }
+
 }
 
 export class Tetromino extends RotatingShape {
