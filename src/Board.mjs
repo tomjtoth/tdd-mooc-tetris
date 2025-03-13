@@ -3,15 +3,11 @@ import { Tetromino } from "./Tetromino.mjs";
 const EVENT_NAME = "lineCleared";
 
 export class Board {
-  width;
-  height;
   #state = [];
   falling = null;
   #evTarget = new EventTarget();
 
   constructor(width, height) {
-    this.width = width;
-    this.height = height;
     for (let row = 0; row < height; row++) {
       const row = [];
       for (let col = 0; col < width; col++) {
@@ -21,10 +17,16 @@ export class Board {
     }
   }
 
+  get height() {
+    return this.#state.length;
+  }
+
+  get width() {
+    return this.#state[0].length;
+  }
+
   set state(str) {
     this.#state = str.split("\n").map((row) => row.trim().split(""));
-    // this.width = this.state[0][0].length;
-    // this.height = this.state[0].length;
   }
 
   pxAt(r, c) {
