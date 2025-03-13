@@ -4,7 +4,7 @@ const EVENT_NAME = "lineCleared";
 
 export class Board {
   #state = [];
-  falling = null;
+  #falling = null;
   #evTarget = new EventTarget();
 
   constructor(width, height) {
@@ -30,7 +30,7 @@ export class Board {
   }
 
   rmFalling() {
-    this.falling = null;
+    this.#falling = null;
   }
 
   pxAt(r, c) {
@@ -49,7 +49,7 @@ export class Board {
             .map((cell, ci) => {
               let px;
 
-              if (this.falling) px = this.falling.pxAt(ri, ci);
+              if (this.#falling) px = this.#falling.pxAt(ri, ci);
               if (!px) px = cell;
 
               return px;
@@ -63,11 +63,11 @@ export class Board {
     if (this.hasFalling()) throw new Error("already falling");
     if (typeof block === "string" && block.length === 1) block = Tetromino._1x1(block);
     block.centerSelf(this.width);
-    this.falling = block;
+    this.#falling = block;
   }
 
   hasFalling() {
-    return this.falling !== null;
+    return this.#falling !== null;
   }
 
   #clearLines() {
@@ -93,27 +93,27 @@ export class Board {
   }
 
   tick() {
-    if (this.falling) this.falling.moveDown(this);
+    if (this.#falling) this.#falling.moveDown(this);
     this.#clearLines();
   }
 
   moveDown() {
-    if (this.falling) this.falling.moveDown(this);
+    if (this.#falling) this.#falling.moveDown(this);
   }
 
   moveLeft() {
-    if (this.falling) this.falling.moveLeft(this);
+    if (this.#falling) this.#falling.moveLeft(this);
   }
 
   moveRight() {
-    if (this.falling) this.falling.moveRight(this);
+    if (this.#falling) this.#falling.moveRight(this);
   }
 
   rotateLeft() {
-    if (this.falling) this.falling.rotateLeft(this);
+    if (this.#falling) this.#falling.rotateLeft(this);
   }
 
   rotateRight() {
-    if (this.falling) this.falling.rotateRight(this);
+    if (this.#falling) this.#falling.rotateRight(this);
   }
 }
