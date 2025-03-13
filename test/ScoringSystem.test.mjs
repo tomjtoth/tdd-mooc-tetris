@@ -64,7 +64,7 @@ describe("Keeping score", () => {
     expect(monitoredMethod.callCount).to.equal(2);
   });
 
-  test.skip("bottom 2 rows of Tetromino.O_SHAPE equals (1+2)*{n}*1 points", () => {
+  test("bottom 2 rows of Tetromino.O_SHAPE equals (1+2)*{n}*1 points", () => {
     board.state = `..........
                    ..........
                    ..........
@@ -87,7 +87,7 @@ describe("Keeping score", () => {
     expect(score.score).to.equal((1 + 2) * board.width * 1);
   });
 
-  test.skip("3rd & 4th rows of Tetromino.I_SHAPE equals (3+4)*{n}*7 points", () => {
+  test("3rd & 4th rows of Tetromino.I_SHAPE equals (3+4)*{n}*7 points", () => {
     board.state = `..........
                    ..........
                    ..IIIIIIII
