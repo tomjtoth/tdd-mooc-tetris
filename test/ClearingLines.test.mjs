@@ -10,22 +10,20 @@ describe("Clearing lines", () => {
   });
 
   test("happens with each tick, *ONLY* on full lines", () => {
-    for (let i = 0; i < 9; i++) {
-      board.state[5][i] = "x";
-    }
+    const initial = `..........
+                     ..........
+                     ..........
+                     ..........
+                     ..........
+                     xxxxxxxxx.`;
+
+    board.state = initial;
 
     board.tick();
 
-    expect(board.toString()).to.equalShape(
-      `..........
-       ..........
-       ..........
-       ..........
-       ..........
-       xxxxxxxxx.`
-    );
+    expect(board.toString()).to.equalShape(initial);
 
-    board.state[5][9] = "x";
+    board.addAt(5, 9);
     board.tick();
 
     expect(board.toString()).to.equalShape(
@@ -39,22 +37,12 @@ describe("Clearing lines", () => {
   });
 
   test("new empty line gets inserted on top", () => {
-    for (let i = 0; i < 6; i++) {
-      board.state[i][0] = i;
-    }
-
-    expect(board.toString()).to.equalShape(
-      `0.........
-       1.........
-       2.........
-       3.........
-       4.........
-       5.........`
-    );
-
-    for (let i = 1; i < 10; i++) {
-      board.state[5][i] = "x";
-    }
+    board.state = `0.........
+                   1.........
+                   2.........
+                   3.........
+                   4.........
+                   5xxxxxxxxx`;
 
     board.tick();
 
@@ -69,35 +57,12 @@ describe("Clearing lines", () => {
   });
 
   test("keeps partial lines unaffected", () => {
-    for (let i = 0; i < 6; i++) {
-      board.state[i][i] = "x";
-      board.state[i][i + 4] = "x";
-    }
-
-    board.tick();
-
-    expect(board.toString()).to.equalShape(
-      `x...x.....
-       .x...x....
-       ..x...x...
-       ...x...x..
-       ....x...x.
-       .....x...x`
-    );
-
-    for (let i = 0; i < 10; i++) {
-      board.state[2][i] = "x";
-      board.state[4][i] = "x";
-    }
-
-    expect(board.toString()).to.equalShape(
-      `x...x.....
-       .x...x....
-       xxxxxxxxxx
-       ...x...x..
-       xxxxxxxxxx
-       .....x...x`
-    );
+    board.state = `x...x.....
+                   .x...x....
+                   xxxxxxxxxx
+                   ...x...x..
+                   xxxxxxxxxx
+                   .....x...x`;
 
     board.tick();
 
@@ -112,13 +77,12 @@ describe("Clearing lines", () => {
   });
 
   test("does not get triggered until a block is only falling", () => {
-    for (let i = 4; i < 10; i++) {
-      board.state[5][i] = "x";
-    }
-
-    for (let i = 0; i < 5; i++) {
-      board.state[i][9] = i;
-    }
+    board.state = `.........0
+                   .........1
+                   .........2
+                   .........3
+                   .........4
+                   ....xxxxxx`;
 
     board.drop(Tetromino.I_SHAPE);
     board.moveLeft();

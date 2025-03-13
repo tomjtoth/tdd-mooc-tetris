@@ -3,34 +3,37 @@ import { Tetromino } from "./Tetromino.mjs";
 export class Board {
   width;
   height;
-  state;
+  #state = [];
   falling = null;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
-
-    this.state = [];
     for (let row = 0; row < height; row++) {
       const row = [];
       for (let col = 0; col < width; col++) {
         row.push(".");
       }
-      this.state.push(row);
+      this.#state.push(row);
     }
   }
 
+  set state(str) {
+    this.#state = str.split("\n").map((row) => row.trim().split(""));
+    // this.width = this.state[0][0].length;
+    // this.height = this.state[0].length;
+  }
 
   pxAt(r, c) {
-    return this.state[r][c];
+    return this.#state[r][c];
   }
 
   addAt(r, c, char = "x") {
-    this.state[r][c] = char;
+    this.#state[r][c] = char;
   }
 
   toString() {
-    return this.state
+    return this.#state
       .map(
         (row, ri) =>
           row
@@ -61,9 +64,9 @@ export class Board {
   #clearLines() {
     outer: for (let r = 0; r < this.height; r++) {
       for (let c = 0; c < this.width; c++) {
-        if (this.state[r][c] === ".") continue outer;
+        if (this.#state[r][c] === ".") continue outer;
       }
-      const emptyLine = this.state.splice(r, 1)[0].map((_) => ".");
+      const emptyLine = this.#state.splice(r, 1)[0].map((_) => ".");
       this.state.splice(0, 0, emptyLine);
     }
   }

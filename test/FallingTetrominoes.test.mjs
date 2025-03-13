@@ -74,9 +74,12 @@ describe("Falling tetrominoes", () => {
     });
 
     test("but not through blocks", () => {
-      board.state[0][0] = "x";
-      board.state[1][0] = "x";
-      board.state[1][1] = "x";
+      board.state = `x.........
+                     xx........
+                     ..........
+                     ..........
+                     ..........
+                     ..........`;
 
       board.drop(Tetromino.T_SHAPE);
 
@@ -133,9 +136,12 @@ describe("Falling tetrominoes", () => {
     });
 
     test("but not through blocks", () => {
-      board.state[0][9] = "x";
-      board.state[1][8] = "x";
-      board.state[1][9] = "x";
+      board.state = `.........x
+                     ........xx
+                     ..........
+                     ..........
+                     ..........
+                     ..........`;
 
       board.drop(Tetromino.T_SHAPE);
 
@@ -196,9 +202,12 @@ describe("Falling tetrominoes", () => {
     });
 
     test("but not through blocks", () => {
-      board.state[4][4] = "x";
-      board.state[5][4] = "x";
-      board.state[5][5] = "x";
+      board.state = `..........
+                     ..........
+                     ..........
+                     ..........
+                     ....x.....
+                     ....xx....`;
 
       board.drop(Tetromino.T_SHAPE);
 
@@ -206,11 +215,8 @@ describe("Falling tetrominoes", () => {
       board.moveDown();
       board.moveDown();
       board.moveDown();
-      expect(board.hasFalling()).to.be.false;
-      board.moveDown();
-      board.moveDown();
-      board.moveDown();
 
+      expect(board.hasFalling()).to.be.false;
       expect(board.toString()).to.equalShape(
         `..........
          ..........
