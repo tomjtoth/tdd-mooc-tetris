@@ -211,7 +211,7 @@ export class Tetromino {
     let right = 0;
 
     this.#ownCoords.forEach(({ row, col }) => {
-      if (board.state[row][col] !== ".") {
+      if (board.pxAt(row, col) !== ".") {
         if (col < 2) left++;
         else right++;
       }
@@ -271,7 +271,7 @@ export class Tetromino {
 
   #finalize(board) {
     this.#ownCoords.forEach(({ row, col }) => {
-      if (row >= 0 && row < board.height && col >= 0 && col < board.width) board.state[row][col] = this.pxAt(row, col);
+      if (row >= 0 && row < board.height && col >= 0 && col < board.width) board.addAt(row, col, this.pxAt(row, col));
     });
     board.falling = null;
     return this;
@@ -289,7 +289,7 @@ export class Tetromino {
     }
 
     for (const [c, r] of mustBeFree) {
-      if (r >= board.height || board.state[r][c] !== ".") return this.#finalize(board);
+      if (r >= board.height || board.pxAt(r, c) !== ".") return this.#finalize(board);
     }
 
     this.#top++;
@@ -308,7 +308,7 @@ export class Tetromino {
     }
 
     for (const [c, r] of mustBeFree) {
-      if (c < 0 || board.state[r][c] !== ".") {
+      if (c < 0 || board.pxAt(r, c) !== ".") {
         return;
       }
     }
@@ -329,7 +329,7 @@ export class Tetromino {
     }
 
     for (const [c, r] of mustBeFree) {
-      if (c >= board.width || board.state[r][c] !== ".") {
+      if (c >= board.width || board.pxAt(r, c) !== ".") {
         return;
       }
     }
