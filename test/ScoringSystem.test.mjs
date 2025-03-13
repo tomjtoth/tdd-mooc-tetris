@@ -4,7 +4,7 @@ import { spy } from "sinon";
 
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
-import { HighScore } from "../src/HighScore.mjs";
+import { ScoringSystem } from "../src/ScoringSystem.mjs";
 
 describe("Keeping score", () => {
   let board;
@@ -12,7 +12,7 @@ describe("Keeping score", () => {
   let monitoredMethod;
 
   beforeEach(() => {
-    score = new HighScore();
+    score = new ScoringSystem();
     board = new Board(10, 6);
 
     monitoredMethod = spy(score, "onLineCleared");

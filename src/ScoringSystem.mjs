@@ -1,6 +1,6 @@
 const RELEVANCE = "OSZLJTI";
 
-export class HighScore {
+export class ScoringSystem {
   score = 0;
 
   constructor() {
