@@ -69,8 +69,16 @@ export class Board {
       for (let c = 0; c < this.width; c++) {
         if (this.#state[r][c] === ".") continue outer;
       }
-      const emptyLine = this.#state.splice(r, 1)[0].map((_) => ".");
-      this.state.splice(0, 0, emptyLine);
+
+      const [line] = this.#state.splice(r, 1);
+      this.#state.splice(
+        0,
+        0,
+        line.map((_) => ".")
+      );
+      this.#evTarget.dispatchEvent(
+        new CustomEvent(EVENT_NAME, { detail: { line, rowIndex: r, boardHeight: this.height } })
+      );
     }
   }
 
