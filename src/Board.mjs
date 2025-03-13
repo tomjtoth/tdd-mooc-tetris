@@ -29,6 +29,10 @@ export class Board {
     this.#state = str.split("\n").map((row) => row.trim().split(""));
   }
 
+  rmFalling() {
+    this.falling = null;
+  }
+
   pxAt(r, c) {
     return this.#state[r][c];
   }

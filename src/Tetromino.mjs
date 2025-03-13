@@ -273,7 +273,7 @@ export class Tetromino {
     this.#ownCoords.forEach(({ row, col }) => {
       if (row >= 0 && row < board.height && col >= 0 && col < board.width) board.addAt(row, col, this.pxAt(row, col));
     });
-    board.falling = null;
+    board.rmFalling();
     return this;
   }
 
