@@ -1,10 +1,13 @@
 import { Tetromino } from "./Tetromino.mjs";
 
+const EVENT_NAME = "lineCleared";
+
 export class Board {
   width;
   height;
   #state = [];
   falling = null;
+  #evTarget = new EventTarget();
 
   constructor(width, height) {
     this.width = width;
@@ -69,6 +72,10 @@ export class Board {
       const emptyLine = this.#state.splice(r, 1)[0].map((_) => ".");
       this.state.splice(0, 0, emptyLine);
     }
+  }
+
+  subscribe(callback) {
+    this.#evTarget.addEventListener(EVENT_NAME, callback);
   }
 
   tick() {
