@@ -20,8 +20,13 @@ export class Board {
     }
   }
 
-  setup(str) {
-    this.state = str.split("\n").map((row) => row.trim().split(""));
+
+  pxAt(r, c) {
+    return this.state[r][c];
+  }
+
+  addAt(r, c, char = "x") {
+    this.state[r][c] = char;
   }
 
   toString() {
