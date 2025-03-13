@@ -20,6 +20,10 @@ export class Board {
     }
   }
 
+  setup(str) {
+    this.state = str.split("\n").map((row) => row.trim().split(""));
+  }
+
   toString() {
     return this.state
       .map(
