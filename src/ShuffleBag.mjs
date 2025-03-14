@@ -1,3 +1,5 @@
+import { Tetromino } from "./Tetromino.mjs";
+
 export class ShuffleBag {
   #order;
   #index = 0;
@@ -9,5 +11,14 @@ export class ShuffleBag {
 
   __shuffle() {}
 
-  next() {}
+  next() {
+    const X = this.#order[this.#index];
+
+    if (++this.#index == this.#order.length) {
+      this.#index = 0;
+      this.__shuffle();
+    }
+
+    return Tetromino[`${X}_SHAPE`];
+  }
 }
