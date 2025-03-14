@@ -2,6 +2,7 @@ const RELEVANCE = "OSZLJTI";
 
 export class ScoringSystem {
   score = 0;
+  level = 1;
 
   constructor() {
     this.onLineCleared = this.onLineCleared.bind(this);
