@@ -9,7 +9,16 @@ export class ShuffleBag {
     this.__shuffle();
   }
 
-  __shuffle() {}
+  __shuffle() {
+    const shuffled = [];
+    const old = this.#order;
+    while (old.length > 0) {
+      const [transferred] = old.splice(old.length === 1 ? 0 : Math.floor(Math.random(old.length)), 1);
+
+      shuffled.push(transferred);
+    }
+    this.#order = shuffled;
+  }
 
   next() {
     const X = this.#order[this.#index];
