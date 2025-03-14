@@ -1,9 +1,6 @@
 import { Board } from "./Board.mjs";
 import { ScoringSystem } from "./ScoringSystem.mjs";
 import { ShuffleBag } from "./ShuffleBag.mjs";
-import { Tetromino } from "./Tetromino.mjs";
-
-// TODO: change this code to match the API you have created, if you want to run the game for some manual testing
 
 function initGame() {
   const canvas = document.getElementById("game");
@@ -16,19 +13,8 @@ function initGame() {
   };
   game.scoring = new ScoringSystem();
   game.board = new Board(game.columns, game.rows);
-  game.board.onClearLine = (lineCount) => {
-    game.scoring.linesCleared(lineCount);
-  };
-  game.tetrominoes = new ShuffleBag([
-    Tetromino.I_SHAPE,
-    Tetromino.T_SHAPE,
-    Tetromino.L_SHAPE,
-    Tetromino.J_SHAPE,
-    Tetromino.T_SHAPE,
-    Tetromino.S_SHAPE,
-    Tetromino.Z_SHAPE,
-    Tetromino.O_SHAPE,
-  ]);
+  game.board.subscribe(game.scoring.onLineCleared);
+  game.tetrominoes = new ShuffleBag("ITLJTSZO");
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {
