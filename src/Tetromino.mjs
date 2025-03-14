@@ -131,11 +131,18 @@ export class Tetromino {
   #orientations;
   #orIndex = 0;
   #checkpoint;
+  shapeSymbol;
 
   constructor(orientations, { state, cloning = false } = {}) {
     this.#orientations = cloning
       ? orientations
-      : orientations.map((str) => str.split("\n").map((row) => row.trim().split("")));
+      : orientations.map((str) =>
+          str.split("\n").map((row) => {
+            const chars = row.trim().split("");
+            if (!this.shapeSymbol) this.shapeSymbol = chars.find((chr) => chr !== ".");
+            return chars;
+          })
+        );
 
     if (cloning) this.#state = state;
   }
@@ -165,13 +172,14 @@ export class Tetromino {
   }
 
   get #state() {
-    return { orIndex: this.#orIndex, left: this.#left, top: this.#top };
+    return { orIndex: this.#orIndex, left: this.#left, top: this.#top, symbol: this.shapeSymbol };
   }
 
   set #state(saved) {
     this.#orIndex = saved.orIndex;
     this.#left = saved.left;
     this.#top = saved.top;
+    this.shapeSymbol = saved.symbol;
 
     console.debug("state set to", saved);
   }
