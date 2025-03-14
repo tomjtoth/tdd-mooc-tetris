@@ -37,6 +37,15 @@ export class Board {
     return this.#state[r][c];
   }
 
+  cellAt(row, col) {
+    let px;
+
+    if (this.#falling) px = this.#falling.pxAt(row, col);
+    if (!px) px = this.#state[row][col];
+
+    return px;
+  }
+
   addAt(r, c, char = "x") {
     this.#state[r][c] = char;
   }
